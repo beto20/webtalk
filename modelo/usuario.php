@@ -2,7 +2,7 @@
 
   class usuario{
     private $id;
-    private $nomape;
+    private $nom_ape;
     private $usuario;
     private $correo;
     private $contraseña;
@@ -16,11 +16,11 @@
     function getId(){
       return $this->id;
     }
-    function setNomape($nomape){
-      $this->nomape = $nomape;
+    function setnom_ape($nom_ape){
+      $this->nom_ape = $nom_ape;
     }
-    function getNomape(){
-      return $this->nomape;
+    function getnom_ape(){
+      return $this->nom_ape;
     }
     function setUsuario($usuario){
       $this->usuario = $usuario;
@@ -56,20 +56,46 @@
     public function __construct(){
       require('conexion.php');
       $var1= new conexion();
-      $this->dbcon = var1->conectar();
+      $this->dbcon = $var1->conectar();
     }
 
     //METODOS
+    //
     public function registrar(){
       $sql="INSERT INTO `usuarios` (`id`, `usuario`, `contraseña`, `nom_ape`, `correo`, `cargo`, `estado`)
-            VALUES (NULL, '$usuario' , '$contraseña' , '$nomape' , '$correo', '$cargo', '$estado')";
+            VALUES (NULL, :usuario , :contraseña , :nom_ape , :correo, :cargo, :estado)";
 
-      mysql($dbcon,$sql);
-
+      $st=$this->$dbcon->prepare($sql);
+      $st->bindParam(':usuario', $this->usuario);
+      $st->bindParam(':contraseña', $this->contraseña);
+      $st->bindParam(':nom_ape', $this->nom_ape);
+      $st->bindParam(':correo', $this->correo);
+      $st->bindParam(':cargo', $this->cargo);
+      $st->bindParam(':estado', $this->estado);
+      try{
+        if ($st->execute()) {
+          return true;
+        }
+      }catch(Exception $e){
+          echo $e->getMessage();
+      }
     }
 
+
+
     public function iniciarsesion(){
+
+
       $sql="SELECT * FROM usuarios WHERE correo = '$correo' AND contraseña = '$contraseña'";
+      try {
+          if ($sql) {
+            echo 'Correcto';
+            header('inicio.php');
+          }
+      } catch (Exception $e) {
+          echo $e->getMessage();
+      }
+
 
     }
 
