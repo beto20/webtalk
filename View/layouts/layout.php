@@ -31,8 +31,8 @@
           </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-          <a href="iniciosesion.php" class="btn btn-success mr-2">Iniciar sesion</a>
-          <a href="registro.php" class="btn btn-success ml-2">Registrarse</a>
+          <a href="login.php" class="btn btn-success mr-2">Iniciar sesion</a>
+          <a href="registro.php" class="btn btn-info ml-2">Registrarse</a>
         </div>
       </div>
     </nav>
