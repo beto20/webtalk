@@ -2,17 +2,24 @@
 
     session_start();
     include('../Util/Conexion.php');
-    
+    /*
     if (!isset($_SESSION['nombre'])) {
         header('Location: ../View/login.php');
     }elseif (isset($_SESSION['nombre'])) {
+        */
 
-        $sql = $conn->query("SELECT * FROM chat");
-        $chats = $sql->fetchAll(PDO::FETCH_OBJ);
-        print_r($chats);
-        '<br>';
-        print_r($_SESSION);
-    }
+        //$sql = $conn->query("SELECT * FROM chat");
+        //$chats = $sql->fetchAll(PDO::FETCH_OBJ);
+        //print_r($chats);
+
+
+    //}
+    $objusuario = new Usuario;
+    $rs = $objusuario->chatXid(1);
+    $chats = $sql->fetchAll(PDO::FETCH_OBJ);
+
+
+
 
 
 ?>
@@ -93,7 +100,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
-                                <section >
+                                <section class="col-md-12 ">
                                     <div class="modal-body">
                                     <form method="POST" class="" action="../Controller/insertar.php">
                                         <div class="form-row" >
@@ -126,21 +133,18 @@
             </div> 
         </div>
         <hr>
-        
         <table class="col-md-10 m-auto" style="text-align:center">
-            <tr >
-                <td><h4>ID</h4></td>
+            <tr>
                 <td><h4>Nombre del canal</h4></td>
                 <td><h4>Fecha de creacion</h4></td>
                 <td><h4>Opciones</h4></td>
             </tr>
             <?php foreach ($chats as $chat) { ?>
             <tr>
-                <td><?php echo $chat->id ?></td>
                 <td><?php echo $chat->nombre ?></td>
                 <td><?php echo $chat->fecha ?></td>
                 <td>
-                    <a class="btn btn-warning" href="../View/canal.php?id=<?php echo $chat->id ?>" id="ingresarcanal" name="ingresarcanal">Ingresar al canal</a>
+                    <a class="btn btn-warning" href="#" id="ingresarcanal" name="ingresarcanal">Ingresar al canal</a>
                     <a class="btn btn-danger" href="../Controller/eliminar.php?id=<?php echo $chat->id ?>" >Eliminar canal</a>
                 </td>
             </tr>
@@ -149,9 +153,6 @@
     </div>
 </section>
     
-
-
-
 
 
 

@@ -1,9 +1,27 @@
 <?php
   include('layouts/layout.php');
-  session_start();
-  if (isset($_SESSION['nombre'])) {
-    header('Location: ../View/home.php');
+
+?>
+
+
+
+
+<?php
+  if(isset($_POST['enviar'])) {
+    session_start();
+    require('../Model/Usuario.php');
+    $objUsuario = new Usuario;
+    $usuario = $_POST['txtusuario'];
+    $pass = $_POST['txtpass'];
+    if ($objUsuario->iniciarsesion($usuario,$pass)) {
+      //echo 'correcto';
+      header('Location: ../View/home.php');
+    }else {
+      echo 'error';
+    }
   }
+
+
 ?>
 
 
@@ -12,7 +30,7 @@
 
 
 <section class="col-md-12" >
-  <form method="POST" class="col-8 offset-2 mt-5" action="../Controller/Validar.php">
+  <form method="POST" class="col-8 offset-2 mt-5" action="">
     <h2>Inicio de sesión</h2>
     <br>
     <div class="form-row">
