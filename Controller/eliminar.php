@@ -8,8 +8,9 @@
     $res = $sql->execute([$id]);
     
     if ($res === TRUE) {
-        header('Location: ../View/home.php');
+        header('Location: ../public/home.php');
     }else {
-        echo 'error';
+        //echo 'error';
+        header('Location: ../public/home.php');
     }
 ?>

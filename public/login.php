@@ -2,7 +2,7 @@
   include('layouts/layout.php');
   session_start();
   if (isset($_SESSION['nombre'])) {
-    header('Location: ../View/home.php');
+    header('Location: ../public/home.php');
   }
 ?>
 
@@ -28,7 +28,7 @@
       </div>
     </div>
     <input class="btn btn-success" type="submit" name="enviar" id="enviar" value="Iniciar sesion">
-    <a class="btn btn-danger" href="../View/index.php">Cancelar</a>
+    <a class="btn btn-danger" href="../public/index.php">Cancelar</a>
   </form>
 </section>
 

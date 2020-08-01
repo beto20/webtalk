@@ -2,24 +2,23 @@
 
     session_start();
     include('../Util/Conexion.php');
-    /*
+    include('../Model/ModelChat.php');
+    
     if (!isset($_SESSION['nombre'])) {
-        header('Location: ../View/login.php');
+        header('Location: ../public/login.php');
     }elseif (isset($_SESSION['nombre'])) {
-        */
 
-        //$sql = $conn->query("SELECT * FROM chat");
-        //$chats = $sql->fetchAll(PDO::FETCH_OBJ);
+        $sql = $conn->query("SELECT * FROM chat");
+        $chats = $sql->fetchAll(PDO::FETCH_OBJ);
+        $userId = $_SESSION['id'];
+        //$objChat = new ModelChat;
+        //$chats = $objChat->mostrarchat($userId);
         //print_r($chats);
+        '<br>';
+        //print_r($_SESSION);
 
 
-    //}
-    $objusuario = new Usuario;
-    $rs = $objusuario->chatXid(1);
-    $chats = $sql->fetchAll(PDO::FETCH_OBJ);
-
-
-
+    }
 
 
 ?>
@@ -100,7 +99,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
-                                <section class="col-md-12 ">
+                                <section >
                                     <div class="modal-body">
                                     <form method="POST" class="" action="../Controller/insertar.php">
                                         <div class="form-row" >
@@ -122,7 +121,7 @@
                                     <div class="modal-footer m-auto">
                                         <input type="submit" name="registrar" class="btn btn-primary" value="Registrar"></input>
                                         <input type="hidden" name="val" value="1">
-                                        <a class="btn btn-danger" href="../View/index.php">Cancelar</a>
+                                        <a class="btn btn-danger" href="../public/index.php">Cancelar</a>
                                     </div>
                                     </form>
                                 </section>
@@ -133,26 +132,46 @@
             </div> 
         </div>
         <hr>
+        
         <table class="col-md-10 m-auto" style="text-align:center">
-            <tr>
+            <tr >
+                
                 <td><h4>Nombre del canal</h4></td>
                 <td><h4>Fecha de creacion</h4></td>
                 <td><h4>Opciones</h4></td>
             </tr>
             <?php foreach ($chats as $chat) { ?>
             <tr>
+
                 <td><?php echo $chat->nombre ?></td>
                 <td><?php echo $chat->fecha ?></td>
                 <td>
-                    <a class="btn btn-warning" href="#" id="ingresarcanal" name="ingresarcanal">Ingresar al canal</a>
+                    <a class="btn btn-warning" href="../public/canal.php?id=<?php echo $chat->id ?>" id="ingresarcanal" name="ingresarcanal">Ingresar al canal</a>
                     <a class="btn btn-danger" href="../Controller/eliminar.php?id=<?php echo $chat->id ?>" >Eliminar canal</a>
                 </td>
             </tr>
             <?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </table>
     </div>
 </section>
     
+
+
+
 
 
 

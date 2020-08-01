@@ -35,7 +35,6 @@
 
 
     //METODO CONSTUCTOR
-
     public function __construct(){
       require_once('../Util/Conexionpoo.php');
       $db = new Conexionpoo();
@@ -46,9 +45,7 @@
     public function registrar(){
       $sql = "INSERT INTO `usuarios`(`id`,`usuario`, `contraseña`, `nom_ape`, `correo`, `cargo`, `estado`)
             VALUES(null, :usuario , :pass , :nom_ape , :correo, :cargo, :estado)";
-
       $st = $this->dbcon->prepare($sql);
-
       $st->bindParam(":usuario", $this->usuario);
       $st->bindParam(":pass", $this->pass);
       $st->bindParam(":nom_ape", $this->nom_ape);
@@ -66,25 +63,19 @@
       }
     }
 
-
-
-
-
     public function iniciarsesion($usuario, $pass){
       $sql="SELECT * FROM usuarios WHERE usuario = :usuario AND contraseña = :pass";
       $st = $this->dbcon->prepare($sql);
       $st->bindParam(":usuario", $usuario);
       $st->bindParam(":pass", $pass);
-
       try {
-          if ($st->execute()) {
-            return true;
-          }else{
-            return false;
-          }
+        if ($st->execute()) {
+          $usuario = $st->fetch(PDO::FETCH_OBJ);
+        }
       } catch (Exception $e) {
           echo $e->getMessage();
       }
+      return $usuario;
     }
 
     public function chatXid($id){
@@ -102,8 +93,6 @@
       }
     }
 
-
-    
     public function userXid(){
       $st = $this->dbcon->prepare('SELECT * FROM usuarios WHERE id = :id');
       $st->bindParam(':id', $this->id);
@@ -132,11 +121,8 @@
       }
     }
 
-    
-    
     public function userXcanal($IdCanal){
       //require('../Model/Chatuser.php');
-
       $st = $this->dbcon->prepare('SELECT * FROM usuarios AS a INNER JOIN chatuser AS b ON a.id=b.usuario_id WHERE sala_id = :salaid');
       $st->bindParam(':salaid', $IdCanal);
       try {
@@ -150,7 +136,5 @@
         echo $e->getMessage();
       }
     }
-
-}
-
-  ?>
+  }
+?>

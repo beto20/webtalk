@@ -11,7 +11,7 @@
     $sql = $conn->prepare("INSERT INTO chat(tipo_id, nombre,fecha ) VALUES (?,?,?)"); 
     $res = $sql->execute([$tipo,$canal,$fecha]);
     if ($res === TRUE) {
-        header('Location:../View/home.php');
+        header('Location:../public/home.php');
     }else {
         echo 'error';
     }

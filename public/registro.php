@@ -9,28 +9,22 @@
     require('../Model/Usuario.php');
     $objUsuario = new Usuario;
     $objUsuario->setUsuario($_POST['txtusuario']);
-    $objUsuario->setPass($_POST['txtpass']);
+
+    $hash_pass = password_hash($_POST['txtpass'],PASSWORD_DEFAULT);
+    $objUsuario->setPass($hash_pass);
     $objUsuario->setNom_ape($_POST['txtnom_ape']);
     $objUsuario->setCorreo($_POST['txtcorreo']);
     $objUsuario->setCargo($_POST['txtcargo']);
     $objUsuario->setEstado('Activo');
     if ($objUsuario->registrar()) {
-      echo 'Resgitrado';
+      //echo 'Resgitrado';
+      header('Location: ../public/login.php');
     }else {
       echo 'error';
     }
   }
 
-
 ?>
-
-
-
-
-
-
-
-
 
 <section class="col-md-12">
   <div class="row registro-room">
@@ -63,7 +57,7 @@
         </div>
       </div>
       <input type="submit" name="registrar" id="registrar" class="btn btn-primary" value="Registrar"></input>
-      <a class="btn btn-danger" href="../View/index.php">Cancelar</a>
+      <a class="btn btn-danger" href="../public/index.php">Cancelar</a>
     </form>
   </div>
 </section>

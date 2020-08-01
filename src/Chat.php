@@ -18,7 +18,6 @@ class Chat implements MessageComponentInterface {
     public function onOpen(ConnectionInterface $conn) {
         // Store the new connection to send messages to later
         $this->clients->attach($conn);
-
         echo "New connection! ({$conn->resourceId})\n";
     }
 
@@ -27,7 +26,6 @@ class Chat implements MessageComponentInterface {
         echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
             , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
 
-        //
         $data = json_decode($msg, true);
         $objMensaje = new \Mensaje;
         $objMensaje->setUsuario_id($data['usuarioId']);
@@ -44,12 +42,6 @@ class Chat implements MessageComponentInterface {
             $data['msg'] = $data['msg'];
             $data['fecha'] = date('d/m/Y h:i:s A');    
         }
-        
-        
-
-
-        //
-
         foreach ($this->clients as $client) {
             if ($from == $client) {
                 $data['from'] = 'Yo';
