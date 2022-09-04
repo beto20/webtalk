@@ -1,11 +1,13 @@
-## descripcion
+## Descripcion
 Aplicacion web para gestionar e interatuar en salas de chat indivuales y grupales mediante comunicacion con WebSockets 
 
-Se empleo: PHP, WebSockets, Ratchet, MySQL, HTML, CSS, JS
+Se empleo: PHP, WebSockets, Ratchet, MySQL, HTML, CSS, JS, Composer
 
 ## Instalacion
 
 ```bash
+$ php composer.phar install 
+o
 $ composer install
 ```
 
